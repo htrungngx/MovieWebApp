@@ -1,0 +1,11 @@
+- IDMB: take API => Postman: GET
+- FireBase: backend, hosting
+- Axios: asyn/await
+- RFCE: ES7 snippets
+- Prettier: extension
+- Banner--fadeBottom
+- npm i: react-youtube (component) + 
+movie-trailer (promise, searching url from names) => const urlParams = new URLSearchParams(new URL(url).search);
+						     urlParams.get('v');
+
+=>>>>>>>>> Viết PP cho sensor + apply iternship again. Test
