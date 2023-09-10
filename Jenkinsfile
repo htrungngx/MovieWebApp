@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         jdk 'jdk20'
+        nodejs 'nodejs20'
     }
     stages {
         stage('Clone') {
