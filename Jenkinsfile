@@ -8,7 +8,13 @@ pipeline {
     }
     stage('Code Analysis') {
       steps {
-        withSonarQubeEnv(installationName: 'Sonarqube')
+        withSonarQubeEnv('Sonarqube') {
+          sh "${scannerHome}/bin/sonar-scanner \
+              -Dsonar.projectKey=Jenkins-Testing \
+              -Dsonar.sources=. "
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+              waitForQualityGate abortPipeline: true
       }
     }
   }
