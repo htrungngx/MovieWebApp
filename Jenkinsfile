@@ -22,17 +22,11 @@ pipeline {
                         -Dsonar.sources=.
                     """
                 }
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
-        stage('Install') {
-            steps {
-                sh "npm install --force"
-            }
-        }
-        stage('Build') {
-            steps {
-                sh "npm start"
-            }
-        }
+        
     }
 }
