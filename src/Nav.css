@@ -7,8 +7,9 @@
     z-index: 1;
 
     /* Animations */
+    transition: all 0.5s;
     transition-timing-function: ease-in; 
-    transition: all 0.5s
+    
 }
 
 .nav--black {
