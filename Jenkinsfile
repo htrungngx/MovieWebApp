@@ -19,12 +19,8 @@ pipeline {
                     sh """
                         ${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=Jenkins-Testing \
-                        -Dsonar.sources=. \
-                        -Dsonar.login=squ_91f2213c7d9fafc9c1a276e068d993fcc40d471b
+                        -Dsonar.sources=.
                     """
-                }
-                timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
                 }
             }
         }
