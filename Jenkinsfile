@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tool {
+      jdk 'jdk20'
+    }
     stages {
         stage('Clone') {
             steps {
@@ -13,8 +16,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('Sonarqube') {
                     sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=Jenkins-Testing \
-                        -Dsonar.sources=."
+                        -Dsonar.projectKey=Jenkins-Testing"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
