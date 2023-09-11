@@ -1,8 +1,0 @@
-- IDMB: take API => Postman: GET
-- FireBase: backend, hosting
-- Axios: asyn/await
-- RFCE: ES7 snippets
-- Prettier: extension
-- Banner--fadeBottom
-- npm i: react-youtube (component) + 
-
