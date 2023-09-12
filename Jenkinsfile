@@ -68,7 +68,7 @@ pipeline {
             steps {
                 sshagent(['ssh-server']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@34.88.164.72
+                    ssh -o StrictHostKeyChecking=no ubuntu@34.88.164.172
                     '''
                 }
             }
