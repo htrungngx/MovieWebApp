@@ -38,7 +38,7 @@ pipeline {
             }
         }
         
-        stage('Code Analysis') {
+        /*stage('Code Analysis') {
             environment {
                 scannerHome = tool 'Sonar-scanner'
             }
@@ -61,6 +61,15 @@ pipeline {
                 ) {
                     sh 'docker build -t dckb9xz/app .'
                     sh 'docker push dckb9xz/app'
+                }
+            }
+        }*/
+        stage('SSH to Production') {
+            steps {
+                sshagent(['ssh-server']) {
+                    sh '''
+                    ssh -o StrictHostKeyChecking=no ubuntu@34.88.164.72
+                    '''
                 }
             }
         }
