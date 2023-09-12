@@ -1,16 +1,24 @@
 pipeline {
     agent any
     environment {
+        //Tele-credential
         TOKEN = credentials('teleToken')
         CHAT_ID = credentials('teleID')
 
-        CURRENT_BUILD_NUMBER = "${currentBuild.number}"
-        LINE_SKIP = "--------------------------------------------------------------"
+        //Git info
         GIT_INFO = "Branch(Version): ${GIT_BRANCH}\nLast Message: ${GIT_MESSAGE}\nAuthor: ${GIT_AUTHOR}\nCommit: ${GIT_COMMIT_SHORT}"
-        PRE_BUILD = "Jenkins is starting\n${LINE_SKIP}\n${JOB_NAME} is building"
+        CURRENT_BUILD_NUMBER = "${currentBuild.number}"
+        GIT_MESSAGE = sh(returnStdout: true, script: "git log -n 1 --format=%s ${GIT_COMMIT}").trim()
+        GIT_AUTHOR = sh(returnStdout: true, script: "git log -n 1 --format=%ae ${GIT_COMMIT}").trim()
+        GIT_COMMIT_SHORT = sh(returnStdout: true, script: "git rev-parse --short ${GIT_COMMIT}").trim()
 
-        TEXT_SUCCESS_BUILD = "${JOB_NAME} is Success"
-        TEXT_FAILURE_BUILD = "${JOB_NAME} is Failure"
+        GIT_INFO = "Branch(Version): ${GIT_BRANCH}\nLast Message: ${GIT_MESSAGE}\nAuthor: ${GIT_AUTHOR}\nCommit: ${GIT_COMMIT_SHORT}"
+        PRE_BUILD = "Jenkins is starting 🚀\n ${LINE_SKIP}\n ${CURRENT_BUILD_NUMBER}\n ${GIT_AUTHOR}\n ${GIT_COMMIT_SHORT}\n ${LINE_SKIP}\n [${JOB_NAME}] is starting to build"
+
+        LINE_SKIP = "-------------------------------------------------"
+
+        TEXT_SUCCESS_BUILD = " ✅ [${JOB_NAME}] is successfully built"
+        TEXT_FAILURE_BUILD = " ❌ [${JOB_NAME}] built FAILED"
     }
     tools {
         jdk 'jdk20'
