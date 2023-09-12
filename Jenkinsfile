@@ -57,8 +57,9 @@ pipeline {
                 }
             }
         }
-        
-        post {
+         
+    }
+    post {
             success {
                 script {
                     sh "curl --location --request POST 'https://api.telegram.org/bot${TOKEN}/sendMessage' --form text='${TEXT_SUCCESS_BUILD}' --form chat_id='${CHAT_ID}'"
@@ -70,5 +71,4 @@ pipeline {
                 }
             }
         }
-    }
 }
