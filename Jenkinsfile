@@ -6,14 +6,13 @@ pipeline {
         CHAT_ID = credentials('teleID')
 
         //Git info
-        GIT_INFO = "Branch(Version): ${GIT_BRANCH}\nLast Message: ${GIT_MESSAGE}\nAuthor: ${GIT_AUTHOR}\nCommit: ${GIT_COMMIT_SHORT}"
+        GIT_INFO = "Branch: ${GIT_BRANCH}\nLast Message: ${GIT_MESSAGE}\nAuthor: ${GIT_AUTHOR}\nCommit: ${GIT_COMMIT_SHORT}\nBuild Number: ${CURRENT_BUILD_NUMBER}"
         CURRENT_BUILD_NUMBER = "${currentBuild.number}"
         GIT_MESSAGE = sh(returnStdout: true, script: "git log -n 1 --format=%s ${GIT_COMMIT}").trim()
         GIT_AUTHOR = sh(returnStdout: true, script: "git log -n 1 --format=%ae ${GIT_COMMIT}").trim()
         GIT_COMMIT_SHORT = sh(returnStdout: true, script: "git rev-parse --short ${GIT_COMMIT}").trim()
 
-        GIT_INFO = "Branch(Version): ${GIT_BRANCH}\nLast Message: ${GIT_MESSAGE}\nAuthor: ${GIT_AUTHOR}\nCommit: ${GIT_COMMIT_SHORT}"
-        PRE_BUILD = "Jenkins is starting 🚀\n ${LINE_SKIP}\n ${CURRENT_BUILD_NUMBER}\n ${GIT_AUTHOR}\n ${GIT_COMMIT_SHORT}\n ${LINE_SKIP}\n [${JOB_NAME}] is starting to build"
+        PRE_BUILD = "Jenkins is starting 🚀\n ${LINE_SKIP}\n ${GIT_INFO}\n ${LINE_SKIP}\n [${JOB_NAME}] is starting to build"
 
         LINE_SKIP = "-------------------------------------------------"
 
