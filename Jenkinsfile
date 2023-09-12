@@ -12,7 +12,7 @@ pipeline {
         GIT_AUTHOR = sh(returnStdout: true, script: "git log -n 1 --format=%ae ${GIT_COMMIT}").trim()
         GIT_COMMIT_SHORT = sh(returnStdout: true, script: "git rev-parse --short ${GIT_COMMIT}").trim()
 
-        PRE_BUILD = "Jenkins is starting 🚀\n ${LINE_SKIP}\ ${GIT_INFO}\n ${LINE_SKIP}\n [${JOB_NAME}] is starting to build"
+        PRE_BUILD = "Jenkins is starting 🚀\n ${LINE_SKIP}\n${GIT_INFO}\n ${LINE_SKIP}\n [${JOB_NAME}] is starting to build"
 
         LINE_SKIP = "---------------------------------------------"
 
