@@ -27,6 +27,11 @@ pipeline {
                 }
             }
         }
+        stage('Build Image') {
+            withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                sh 'docker build -t dckb9xz/app .'
+            }
+        }
         
     }
 }
