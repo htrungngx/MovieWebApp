@@ -4,12 +4,15 @@ pipeline {
         jdk 'jdk20'
         nodejs 'nodejs20'
     }
+    
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/htrungngx/MovieWebApp.git'
+                git branch: 'main',
+                    url: 'https://github.com/htrungngx/MovieWebApp.git'
             }
         }
+        
         stage('Code Analysis') {
             environment {
                 scannerHome = tool 'Sonar-scanner'
@@ -27,11 +30,16 @@ pipeline {
                 }
             }
         }
+        
         stage('Build Image') {
-            withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-                sh 'docker build -t dckb9xz/app .'
+            steps {
+                withDockerRegistry(
+                    credentialsId: 'docker-hub',
+                    url: 'https://index.docker.io/v1/'
+                ) {
+                    sh 'docker build -t dckb9xz/app .'
+                }
             }
         }
-        
     }
 }
