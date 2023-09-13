@@ -37,7 +37,7 @@ pipeline {
                     url: 'https://github.com/htrungngx/MovieWebApp.git'
             }
         }
-        
+        //asdasdadadsasdasd//
         /*stage('Code Analysis') {
             environment {
                 scannerHome = tool 'Sonar-scanner'
@@ -51,7 +51,7 @@ pipeline {
                     """
                 }
             }
-        }
+        }*/
         
         stage('Build Image') {
             steps {
@@ -63,8 +63,17 @@ pipeline {
                     sh 'docker push dckb9xz/app'
                 }
             }
-        }*/
-        stage('SSH to Production') {
+        }
+        stage('Deploy to DevEnv') {
+            steps {
+                echo 'Deploying and Cleaning'
+                sh 'sudo docker ps -a'
+                sh 'sudo docker rm -f movieapp || echo 'The container does not exist''
+                sh 'sudo docker run --name movieapp -p 3000:3000 -d dckb9xz/app'
+
+            }
+        }
+        /*stage('SSH to Production') {
             steps {
                 sshagent(['ssh-server']) {
                     sh '''
@@ -72,7 +81,7 @@ pipeline {
                     '''
                 }
             }
-        }
+        }*/
          
     }
     post {
