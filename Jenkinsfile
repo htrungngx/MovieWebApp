@@ -68,9 +68,8 @@ pipeline {
             steps {
                 echo 'Deploying and Cleaning'
                 sh 'sudo docker ps -a'
-                sh 'sudo docker rm -f movieapp || echo 'The container does not exist''
+                sh "sudo docker rm -f movieapp || echo 'The container does not exist'"
                 sh 'sudo docker run --name movieapp -p 3000:3000 -d dckb9xz/app'
-
             }
         }
         /*stage('SSH to Production') {
