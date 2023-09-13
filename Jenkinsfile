@@ -75,9 +75,7 @@ pipeline {
             steps {
                 sshagent(['ssh-server']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no htrung_jobs@34.88.164.172 'echo $HOME'
-                    mkdir htrung_dir_test
-                    
+                    ssh -o StrictHostKeyChecking=no htrung_jobs@34.88.164.172 << ssh-scripts.sh
                     """                
                 }
             }
