@@ -37,7 +37,6 @@ pipeline {
                     url: 'https://github.com/htrungngx/MovieWebApp.git'
             }
         }
-        //asdasdadadsasdasd//
         /*stage('Code Analysis') {
             environment {
                 scannerHome = tool 'Sonar-scanner'
