@@ -50,7 +50,7 @@ pipeline {
                     """
                 }
             }
-        }
+        }*/
         
         stage('Build Image') {
             steps {
@@ -59,7 +59,7 @@ pipeline {
                     url: 'https://index.docker.io/v1/'
                 ) {
                     sh 'docker build -t dckb9xz/app .'
-                    //sh 'docker push dckb9xz/app'
+                    sh 'docker push dckb9xz/app'
                 }
             }
         }
@@ -68,14 +68,14 @@ pipeline {
                 echo 'Deploying and Cleaning'
                 sh 'docker ps -a'
                 sh "docker rm -f movieapp || echo 'The container does not exist'"
-                //sh 'docker run --name movieapp -p 3000:3000 -d dckb9xz/app'
+                sh 'docker run --name movieapp -p 3000:3000 -d dckb9xz/app'
             }
-        }*/
+        }
         stage('SSH to Production') {
             steps {
                 sshagent(['ssh-server']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no htrung_jobs@34.88.164.172 << ssh-scripts.sh
+                    ssh -o StrictHostKeyChecking=no htrung_jobs@34.88.164.172 < ssh-scripts.sh
                     """                
                 }
             }
