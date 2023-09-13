@@ -74,9 +74,8 @@ pipeline {
         stage('SSH to Production') {
             steps {
                 sshagent(['ssh-server']) {
-                    sh '''
-                    ssh -o StrictHostKeyChecking=no htrung_jobs@34.88.164.172 'echo $HOME'
-                    '''
+                    sh 'ssh -o StrictHostKeyChecking=no htrung_jobs@34.88.164.172 'echo $HOME''
+                    sh 'mkdir htrung_dir_test'
                 }
             }
         }
