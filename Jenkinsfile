@@ -30,13 +30,14 @@ pipeline {
                 sh "curl --location --request POST 'https://api.telegram.org/bot${TOKEN}/sendMessage' --form text='${PRE_BUILD}' --form chat_id='${CHAT_ID}'"
             }
         }
-
+        //Clone code from repogistory
         stage('Clone') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/htrungngx/MovieWebApp.git'
             }
         }
+        //Send code to Analysis Server
         stage('Code Analysis') {
             environment {
                 scannerHome = tool 'Sonar-scanner'
@@ -51,7 +52,7 @@ pipeline {
                 }
             }
         }
-        
+        //Build code with Docker and Push to Registry
         stage('Build Image') {
             steps {
                 withDockerRegistry(
@@ -63,14 +64,16 @@ pipeline {
                 }
             }
         }
+        //Deploy to Dev Environment
         stage('Deploy to DevEnv') {
             steps {
                 echo 'Deploying and Cleaning'
                 sh 'docker ps -a'
-                sh "docker rm -f movieapp || echo 'The container does not exist'"
+                sh "docker rm -f movieapp || echo 'The container does not exist'" //Remove exist container
                 sh 'docker run --name movieapp -p 3000:3000 -d dckb9xz/app'
             }
         }
+        //Deploy to production server
         stage('SSH to Production') {
             steps {
                 sshagent(['ssh-server']) {
