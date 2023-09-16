@@ -68,6 +68,7 @@ pipeline {
         stage('Deploy to DevEnv') {
             steps {
                 echo 'Deploying and Cleaning'
+                sh 'docker pull dckb9xz/app:latest'
                 sh 'docker ps -a'
                 sh "docker rm -f movieapp || echo 'The container does not exist'" //Remove exist container
                 sh 'docker run --name movieapp -p 3000:3000 -d dckb9xz/app'
