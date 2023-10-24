@@ -1,6 +1,6 @@
 # Project Overview
 
-This project is a proof of CI/CD concept and demonstrates a comprehensive automated pipeline for an web app 
+This project is a proof of CI/CD concept and demonstrates a comprehensive automated pipeline for an web app.
 
 ## Authors
 
