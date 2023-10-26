@@ -59,6 +59,7 @@ pipeline {
                     credentialsId: 'docker-hub',
                     url: 'https://index.docker.io/v1/'
                 ) {
+                    sh 'docker pull dckb9xz/app:latest || exit 0'
                     sh 'docker build -t dckb9xz/app .'
                     sh 'docker push dckb9xz/app'
                 }
