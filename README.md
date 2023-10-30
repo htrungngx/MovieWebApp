@@ -35,4 +35,4 @@ This project is a proof of CI/CD concept and demonstrates a comprehensive automa
 - [Messaging](https://web.telegram.org/)
 
 
-DEMO for testing
+Testing 
